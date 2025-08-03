@@ -70,7 +70,7 @@ neural_network_cpp/
    The program will:
    - Load the dataset (42,000 samples)
    - Split into 80% training, 20% testing
-   - Train for 15 epochs with mini-batch gradient descent
+   - Train for 10 epochs with mini-batch gradient descent
    - Display training progress with loss and accuracy
    - Show overall test performance metrics
 
@@ -94,10 +94,11 @@ neural_network_cpp/
 ```
 Loading dataset...
 Loaded 42000 samples.
-Epoch 1/15 — loss: 1.08101 — acc:  0.781071
-Epoch 2/15 — loss: 0.802601 — acc:  0.826399
+Epoch 1/10 — loss: 1.08101 — acc:  0.781071
+Epoch 2/10 — loss: 0.802601 — acc:  0.826399
+Epoch 3/10 — loss: 0.715090 — acc:  0.838631
 ...
-Overall Accuracy: 0.839524
+Overall Accuracy: 0.845000
 
 ==================================================
 INTERACTIVE PREDICTION MODE
@@ -125,22 +126,23 @@ Result: ✓ CORRECT
 ## Network Architecture
 
 - **Input Layer**: 784 neurons (28x28 pixel images flattened)
-- **Hidden Layer**: 256 neurons with ReLU activation
+- **Hidden Layer**: 128 neurons with ReLU activation
 - **Output Layer**: 10 neurons with softmax activation (digit probabilities)
 - **Loss Function**: Cross-entropy loss
-- **Optimizer**: Mini-batch gradient descent (batch size: 64)
-- **Learning Rate**: 0.01 with decay every 10 epochs
-- **Training**: 15 epochs for optimal performance
+- **Optimizer**: Mini-batch gradient descent (batch size: 32)
+- **Learning Rate**: 0.001 with decay every 10 epochs
+- **Training**: 10 epochs for optimal performance
+- **Gradient Clipping**: ±1.0 for training stability
 
 ## Configuration
 
 Key parameters can be modified in `main.cpp`:
 
 ```cpp
-int hidden_units = 256;        // Hidden layer size
-double learning_rate = 0.01;   // Learning rate
-int batch_size = 64;           // Mini-batch size
-int epochs = 15;               // Training epochs
+int hidden_units = 128;        // Hidden layer size
+double learning_rate = 0.001;  // Learning rate
+int batch_size = 32;           // Mini-batch size
+int epochs = 10;               // Training epochs
 ```
 
 ## Drawing Your Own Digits
@@ -196,9 +198,10 @@ The MNIST dataset should be in CSV format with:
 
 ## Performance
 
-- **Training Time**: ~30 seconds for 5 epochs
-- **Test Accuracy**: ~84% (5 epochs), ~87% (15 epochs)
+- **Training Time**: ~25 seconds for 10 epochs
+- **Test Accuracy**: ~84-87% (10 epochs with stable training)
 - **Memory Usage**: Efficient matrix operations without external libraries
+- **Training Stability**: Gradient clipping prevents exploding gradients
 
 ## Troubleshooting
 

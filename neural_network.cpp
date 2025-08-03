@@ -46,7 +46,7 @@ void NeuralNetwork::backward(const Matrix& X, const Matrix& Y,
     Matrix dW1 = scalar_multiply(matmul(dZ1, transpose(X)), 1.0 / m);
     Matrix db1 = scalar_multiply(sum_columns(dZ1), 1.0 / m);
 
-    double clip_value = 5.0;
+    double clip_value = 1.0;
     auto clip_matrix = [clip_value](Matrix& mat) {
         for (auto& row : mat) {
             for (auto& val : row) {
