@@ -52,10 +52,10 @@ int main() {
     Matrix Y_train = one_hot(Y_train_lbl, 10);
 
     int input_size = 784, hidden_units = 128, output_size = 10;
-    double learning_rate = 0.001;
+    double learning_rate = 0.003;
     NeuralNetwork nn(input_size, hidden_units, output_size, learning_rate);
 
-    int batch_size = 32, epochs = 10, num_batches = train_sz / batch_size;
+    int batch_size = 64, epochs = 10, num_batches = train_sz / batch_size;
 
     for (int e = 0; e < epochs; ++e) {
         std::shuffle(idx.begin(), idx.begin() + train_sz, rng);

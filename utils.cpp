@@ -3,14 +3,24 @@
 #include <numeric>
 #include <cmath>
 #include <algorithm>
+#ifdef _OPENMP
+#include <omp.h>
+#endif
 
 Matrix matmul(const Matrix& A, const Matrix& B) {
     int n = A.size(), k = A[0].size(), m = B[0].size();
     Matrix C(n, std::vector<double>(m, 0.0));
-    for (int i = 0; i < n; ++i)
-        for (int j = 0; j < m; ++j)
-            for (int p = 0; p < k; ++p)
+    
+    #ifdef _OPENMP
+    #pragma omp parallel for collapse(2)
+    #endif
+    for (int i = 0; i < n; ++i) {
+        for (int j = 0; j < m; ++j) {
+            for (int p = 0; p < k; ++p) {
                 C[i][j] += A[i][p] * B[p][j];
+            }
+        }
+    }
     return C;
 }
 
