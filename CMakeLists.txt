@@ -1,5 +1,14 @@
 cmake_minimum_required(VERSION 3.10)
-project(NeuralNetworkFromScratch)
+
+# Reset any toolchain
+set(CMAKE_TOOLCHAIN_FILE "")
+
+# Force compiler before project
+set(CMAKE_C_COMPILER gcc)
+set(CMAKE_CXX_COMPILER g++)
+set(CMAKE_GENERATOR "Unix Makefiles")
+
+project(NeuralNetworkFromScratch C CXX)
 
 set(CMAKE_CXX_STANDARD 17)
 
